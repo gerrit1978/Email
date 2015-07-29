@@ -44,7 +44,9 @@ class SubscriberController extends Controller
 				'email' => $form->get('email')->getData(),
 	        );
 	        $result = $em->getRepository('HedgeCommEmailBundle:Subscriber')->addSubscribers($values, $client, $subscriberList);
-	        $this->addFlash('notice', 'A new subscriber was added');
+	        $message = $result['subscribed'] . " subscriber(s) added - " . $result['duplicate'] . " duplicate subscriber(s) not added.";
+	        
+	        $this->addFlash('notice', $message);
 	        return $this->redirectToRoute('subscriberlist_detail', array('clientid' => $clientid, 'listid' => $listid));
 		} else {
 			/* Form is not (yet) valid */
@@ -99,6 +101,9 @@ class SubscriberController extends Controller
 		        }
 	        }
 	        $result = $em->getRepository('HedgeCommEmailBundle:Subscriber')->addSubscribers($subscribersFinal, $client, $subscriberList);
+	        $message = $result['subscribed'] . " subscriber(s) added - " . $result['duplicate'] . " duplicate subscriber(s) not added.";
+
+	        $this->addFlash('notice', $message);
 	        return $this->redirectToRoute('subscriberlist_detail', array('clientid' => $clientid, 'listid' => $listid));
 	        
 	    }
@@ -156,30 +161,36 @@ class SubscriberController extends Controller
 		        }
 	        }
 	        $result = $em->getRepository('HedgeCommEmailBundle:Subscriber')->addSubscribers($subscribersFinal, $client, $subscriberList);
-	        return $this->redirectToRoute('subscriberlist_detail', array('clientid' => $clientid, 'listid' => $listid));
-/*
-	        $data = $form->getData();
-	        $values = trim($data['subscribers']);
-	        $valuesModified = ereg_replace( "\n", "\n", $values);
-	        $subscribers = explode("\n", $valuesModified);
-	        $subscribersFinal = array();
-	        if (count($subscribers)) 
-	        {
-		        foreach ($subscribers as $subscriber)
-		        {
-			        $subscriberArray = explode(',', $subscriber);
-			        $name = $subscriberArray[0];
-			        $email = $subscriberArray[1];
-			        if (!$email) $email = "email";
-			        $subscribersFinal[] = array('name' => $name, 'email' => $email);
-		        }
-	        }
-	        $result = $em->getRepository('HedgeCommEmailBundle:Subscriber')->addSubscribers($subscribersFinal, $client, $subscriberList);
-*/	        
+	        $message = $result['subscribed'] . " subscriber(s) added - " . $result['duplicate'] . " duplicate subscriber(s) not added.";
+
+	        $this->addFlash('notice', $message);
 	        return $this->redirectToRoute('subscriberlist_detail', array('clientid' => $clientid, 'listid' => $listid));
 	        
 	    }
 	    
 	    return $this->render('HedgeCommEmailBundle:Subscriber:addmultiple.html.twig', array('form' => $form->createView(), 'client' => $client, 'list' => $subscriberList));
     }
+
+	/**
+	 * Toggle an existing subscriber's status
+	 *
+	 * @param integer $clientid
+	 * @param integer $listid
+	 * @param integer $subscriberid
+	 *
+	 */
+    public function toggleSubscriberStatusAction($clientid, $listid, $subscriberid)
+    {
+		$em = $this->getDoctrine()->getManager();
+		$subscriber = $em->getRepository('HedgeCommEmailBundle:Subscriber')->find($subscriberid);
+		if (!$subscriber)
+		{
+			throw $this->createNotFoundException('No subscriber found for id ' . $subscriberid);
+		}
+		$message = $em->getRepository('HedgeCommEmailBundle:Subscriber')->toggleSubscriberStatus($subscriber);
+        $this->addFlash('notice', $message);
+        return $this->redirectToRoute('subscriberlist_detail', array('clientid' => $clientid, 'listid' => $listid));
+
+    }
+    
 }

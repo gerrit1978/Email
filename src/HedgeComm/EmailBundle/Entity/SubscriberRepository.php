@@ -13,6 +13,12 @@ use Doctrine\ORM\EntityRepository;
 class SubscriberRepository extends EntityRepository
 {
 
+	/**
+	 * Delete subscribers
+	 *
+	 * @param array(Subscribers) $subscribers
+	 *
+	 */
 	public function deleteSubscribers($subscribers)
 	{
 		$em = $this->getEntityManager();
@@ -28,7 +34,16 @@ class SubscriberRepository extends EntityRepository
 			$em->flush();
 		}
 	}
-	
+
+	/**
+	 * Check if an email address is already subscribed
+	 * in list and for client
+	 *
+	 * @param string $email
+	 * @param Client $client
+	 * @param SubscriberList $subscriberList
+	 *
+	 */	
 	public function checkSubscriberExists($email, $client, $subscriberList)
 	{	
 		$count = 0;
@@ -46,25 +61,22 @@ class SubscriberRepository extends EntityRepository
 		{
 			return FALSE;
 		}
-/*
-		$subscribers = $em->getRepository('HedgeCommEmailBundle:Subscriber')->findBy(array(
-			'email' => $email,
-			'client' => $client->getId(),
-			'subscriberList' => $subscriberList->getId(),
-		));
-		if (count($subscribers))
-		{
-			return TRUE;
-		} else
-		{
-			return FALSE;
-		}
-*/
 	}
 	
+	/**
+	 * Add subscribers
+	 *
+	 * @param array $subscribers
+	 * @param Client $client
+	 * @param SubscriberList $subscriberList
+	 *
+	 */
 	public function addSubscribers($subscribers, $client, $subscriberList)
 	{
 	
+		$countSubscribed = 0;
+		$countDuplicate = 0;
+		
 		if (isset($subscribers['email']))
 		{
 			$subscribers = array($subscribers);
@@ -78,6 +90,7 @@ class SubscriberRepository extends EntityRepository
 			$exists = $this->checkSubscriberExists($email, $client, $subscriberList);
 			if (!$exists)
 			{
+				$countSubscribed++;
 				$subscriber = new Subscriber();
 				if (isset($values['name']))
 				{
@@ -90,8 +103,72 @@ class SubscriberRepository extends EntityRepository
 		        $subscriber->setUnsubscribed(0);
 		        $em->persist($subscriber);
 		        $em->flush();
+			} else
+			{
+				$countDuplicate++;
 			}
 		}
+		$result = array('subscribed' => $countSubscribed, 'duplicate' => $countDuplicate);
+		return $result;
 	}
 
+	/**
+	 * Unsubscribe existing subscriber
+	 *
+	 * @param Subscriber $subscriber
+	 *
+	 */
+	public function unsubscribeSubscriber($subscriber)
+	{
+		$em = $this->getEntityManager();
+		$subscriber->setUnsubscribed(1);
+		$em->flush();
+	}
+
+	/**
+	 * Resubscribe existing subscriber
+	 *
+	 * @param Subscriber $subscriber
+	 *
+	 */
+	public function resubscribeSubscriber($subscriber)
+	{
+		$em = $this->getEntityManager();
+		$subscriber->setUnsubscribed(0);
+		$em->flush();
+	}
+
+	/**
+	 * Toggle subscribers status
+	 *
+	 * @param array $subscribers
+	 *
+	 */
+	 public function toggleSubscriberStatus($subscribers)
+	 {
+	 	if (!is_array($subscribers))
+	 	{
+	 		$subscribers = array($subscribers);
+	 	}
+	 	
+	 	$countResubscribed = 0;
+	 	$countUnsubscribed = 0;
+	 	
+	 	foreach ($subscribers as $subscriber)
+	 	{
+	 		$currentStatus = $subscriber->getUnsubscribed();
+	 		if ($currentStatus == 1) // currently unsubscribed
+	 		{
+	 			$this->resubscribeSubscriber($subscriber);
+	 			$countResubscribed++;
+	 		} else
+	 		{
+	 			$this->unsubscribeSubscriber($subscriber);
+	 			$countUnsubscribed++;
+	 		}
+	 	}
+	 	$message = $countUnsubscribed . " subscriber(s) UNsubscribed - " . $countResubscribed . " subscriber(s) REsubscribed";
+	 	return $message;
+	 }
+	
 }

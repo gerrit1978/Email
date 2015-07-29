@@ -21,7 +21,7 @@ Name: {{ subscriberList.name }}
 <tr>
   <th>Name</th>
   <th>Email</th>
-  <th>Unsubscribed</th>
+  <th>Status</th>
 </tr>
 
 {% for subscriber in subscribers %}
@@ -30,9 +30,9 @@ Name: {{ subscriberList.name }}
   <td>{{ subscriber.email }}</td>
   <td>
   {% if subscriber.unsubscribed %}
-    unsubscribed
+    <a href="{{ path('subscriber_toggle_status', {'clientid': client.id, 'listid': subscriberList.id, 'subscriberid': subscriber.id}) }}">unsubscribed</a>
   {% else %}
-    active
+    <a href="{{ path('subscriber_toggle_status', {'clientid': client.id, 'listid': subscriberList.id, 'subscriberid': subscriber.id}) }}">active</a>
   {% endif %}  
   </td>
 </tr>

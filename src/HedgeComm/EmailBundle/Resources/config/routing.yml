@@ -61,3 +61,7 @@ subscriber_add_multiple:
 subscriber_import_csv:
     path:       /client/{clientid}/list/{listid}/subscriber/importcsv
     defaults:   { _controller: HedgeCommEmailBundle:Subscriber:subscriberImportCsv }
+
+subscriber_toggle_status:
+    path:        /client/{clientid}/list/{listid}/subscriber/{subscriberid}/togglestatus
+    defaults:    { _controller: HedgeCommEmailBundle:Subscriber:toggleSubscriberStatus }
