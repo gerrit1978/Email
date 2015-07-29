@@ -37,5 +37,6 @@ Name: {{ subscriberList.name }}
 {% endfor %}
 </table>
 <a href="{{ path('subscriber_add_single', {'clientid': client.id, 'listid': subscriberList.id}) }}">Add single subscriber</a>&nbsp;
-<a href="{{ path('subscriber_add_multiple', {'clientid': client.id, 'listid': subscriberList.id}) }}">Add multiple subscribers at once</a>
+<a href="{{ path('subscriber_add_multiple', {'clientid': client.id, 'listid': subscriberList.id}) }}">Add multiple subscribers at once</a>&nbsp;
+<a href="{{ path('subscriber_import_csv', {'clientid': client.id, 'listid': subscriberList.id}) }}">Import a CSV file with subscribers</a>
 {% endblock %}

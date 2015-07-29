@@ -57,3 +57,7 @@ subscriber_add_single:
 subscriber_add_multiple:
     path:       /client/{clientid}/list/{listid}/subscriber/addmultiple
     defaults:   { _controller: HedgeCommEmailBundle:Subscriber:subscriberAddMultiple }
+
+subscriber_import_csv:
+    path:       /client/{clientid}/list/{listid}/subscriber/importcsv
+    defaults:   { _controller: HedgeCommEmailBundle:Subscriber:subscriberImportCsv }
