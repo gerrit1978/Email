@@ -1,0 +1,38 @@
+{% extends 'HedgeCommEmailBundle:Default:base.html.twig' %}
+
+{% block title %}
+Overview Client
+{% endblock %}
+
+{% block body %}
+
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-notice">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
+<table>
+<tr>
+  <th>ID</th>
+  <th>Name</th>
+  <th>From Name</th>
+  <th>From Email</th>
+  <th>Reply To</th>
+  <th>Actions</th>
+</tr>
+{% for client in clients %}
+<tr>
+  <td>{{ client.id }}</td>
+  <td><a href="{{ path('client_detail', {'clientid': client.id}) }}">{{ client.name }}</a></td>
+  <td>{{ client.fromName }}</td>
+  <td>{{ client.fromEmail }}</td>
+  <td>{{ client.replyTo }}</td>
+  <td><a href="{{ path('client_edit',{'clientid': client.id}) }}">edit client</a>&nbsp; <a href="{{ path('client_delete',{'clientid': client.id}) }}">delete client</a>&nbsp;</td>
+</tr>
+{% endfor %}
+</table>
+
+<a href="{{ path('client_create') }}">Add new client</a>
+{% endblock %}

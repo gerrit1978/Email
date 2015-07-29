@@ -1,0 +1,59 @@
+home:
+    path:     /
+    defaults: { _controller: HedgeCommEmailBundle:Default:home }
+
+hedge_comm_email_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: HedgeCommEmailBundle:Default:index }
+
+client_overview:
+    path:     /clients
+    defaults: { _controller: HedgeCommEmailBundle:Client:clientOverview }
+
+client_create:
+    path:     /client/create
+    defaults: { _controller: HedgeCommEmailBundle:Client:clientCreate }
+
+client_detail:
+    path:     /client/{clientid}
+    defaults: { _controller: HedgeCommEmailBundle:Client:clientDetail }
+    requirements:
+        id:  \d{1,10}
+
+client_edit:
+    path:      /client/{clientid}/edit
+    defaults:   { _controller: HedgeCommEmailBundle:Client:clientEdit }
+    
+client_delete:
+    path:      /client/{clientid}/delete
+    defaults:   { _controller: HedgeCommEmailBundle:Client:clientDelete }
+
+client_list_overview:
+    path:      /client/{clientid}/lists
+    defaults:  { _controller: HedgeCommEmailBundle:Client:clientListOverview }
+
+
+subscriberlist_create:
+    path:      /client/{clientid}/list/create
+    defaults:  { _controller: HedgeCommEmailBundle:List:createSubscriberList }
+ 
+subscriberlist_edit:
+    path:      /client/{clientid}/list/{listid}/edit
+    defaults:   { _controller: HedgeCommEmailBundle:List:editSubscriberList }
+    
+subscriberlist_delete:
+    path:      /client/{clientid}/list/{listid}/delete
+    defaults:   { _controller: HedgeCommEmailBundle:List:deleteSubscriberList }
+
+subscriberlist_detail:
+    path:	   /client/{clientid}/list/{listid}/detail
+    defaults:   { _controller: HedgeCommEmailBundle:List:detailSubscriberList }
+    
+    
+subscriber_add_single:
+    path:		/client/{clientid}/list/{listid}/subscriber/addsingle
+    defaults:	{ _controller: HedgeCommEmailBundle:Subscriber:subscriberAddSingle }
+
+subscriber_add_multiple:
+    path:       /client/{clientid}/list/{listid}/subscriber/addmultiple
+    defaults:   { _controller: HedgeCommEmailBundle:Subscriber:subscriberAddMultiple }

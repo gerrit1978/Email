@@ -1,0 +1,11 @@
+hedge_comm_email:
+    resource: "@HedgeCommEmailBundle/Resources/config/routing.yml"
+    prefix:   /
+
+hedge_comm_test:
+    resource: "@HedgeCommTestBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

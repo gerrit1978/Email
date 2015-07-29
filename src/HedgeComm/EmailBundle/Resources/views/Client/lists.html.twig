@@ -1,0 +1,32 @@
+{% extends 'HedgeCommEmailBundle:Default:base.html.twig' %}
+
+{% block title %}
+Lists Client {{ client.name }}
+{% endblock %}
+
+{% block body %}
+
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-notice">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
+<table>
+<tr>
+  <th>ID</th>
+  <th>Name</th>
+  <th>Actions</th>
+</tr>
+{% for list in lists %}
+<tr>
+  <td>{{ list.id }}</td>
+  <td>{{ list.name }}</td>
+  <td>ACTIONS</td>
+</tr>
+{% endfor %}
+</table>
+
+<a href="{{ path('subscriberlist_create') }}">Add new subscriberlist</a>
+{% endblock %}

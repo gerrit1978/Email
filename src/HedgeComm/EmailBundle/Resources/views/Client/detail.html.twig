@@ -1,0 +1,47 @@
+{% extends 'HedgeCommEmailBundle:Default:base.html.twig' %}
+
+{% block title %}
+Client Detail {{ client.name }}
+{% endblock %}
+
+{% block body %}
+
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-notice">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+<h3>Details</h3>
+Naam: {{ client.name }}<br />
+From name: {{ client.fromName }}<br />
+From email: {{ client.fromEmail }}<br />
+Reply To: {{ client.replyTo }}<br />
+<a href="{{ path('client_edit', {'clientid': client.id}) }}">Edit client</a>&nbsp; <a href="{{ path('client_overview') }}">Back to overview</a>
+<h3>Lists</h3>
+<table>
+<tr>
+  <th>ID</th>
+  <th>Name</th>
+  <th>Description</th>
+  <th>Status</th>
+  <th>Actions</th>
+</tr>
+{% for subscriberList in subscriberLists %}
+<tr>
+  <td>{{ subscriberList.id }}</td>
+  <td><a href="{{ path('subscriberlist_detail', {'clientid': client.id, 'listid': subscriberList.id}) }}">{{ subscriberList.name }}</a></td>
+  <td>{{ subscriberList.description }}</td>
+  <td>
+  {% if subscriberList.status %}
+    active
+  {% else %}
+    inactive
+  {% endif %}
+  </td>
+  <td><a href="{{ path('subscriberlist_edit', {'clientid': client.id, 'listid': subscriberList.id}) }}">edit list</a>&nbsp;<a href="{{ path('subscriberlist_delete', {'clientid': client.id, 'listid': subscriberList.id}) }}">delete list</a></td>
+</tr>
+{% endfor %}
+</table>
+<a href="{{ path('subscriberlist_create', {'clientid': client.id }) }}">Add new list</a>
+{% endblock %}

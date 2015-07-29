@@ -1,0 +1,41 @@
+{% extends 'HedgeCommEmailBundle:Default:base.html.twig' %}
+
+{% block title %}
+Detail Lists
+{% endblock %}
+
+{% block body %}
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-notice">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+<h3>List Details</h3>
+Client: {{ client.name }}<br />
+Name: {{ subscriberList.name }}
+
+<h3>Subscribers</h3>
+<table>
+<tr>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Unsubscribed</th>
+</tr>
+
+{% for subscriber in subscribers %}
+<tr>
+  <td>{{ subscriber.name }}</td>
+  <td>{{ subscriber.email }}</td>
+  <td>
+  {% if subscriber.unsubscribed %}
+    unsubscribed
+  {% else %}
+    active
+  {% endif %}  
+  </td>
+</tr>
+{% endfor %}
+</table>
+<a href="{{ path('subscriber_add_single', {'clientid': client.id, 'listid': subscriberList.id}) }}">Add single subscriber</a>&nbsp;
+<a href="{{ path('subscriber_add_multiple', {'clientid': client.id, 'listid': subscriberList.id}) }}">Add multiple subscribers at once</a>
+{% endblock %}

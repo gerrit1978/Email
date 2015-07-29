@@ -1,0 +1,7 @@
+hedge_comm_test_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: HedgeCommTestBundle:Default:index }
+
+hedge_comm_test_testpage:
+    path:     /test
+    defaults: { _controller: HedgeCommTestBundle:Default:test }

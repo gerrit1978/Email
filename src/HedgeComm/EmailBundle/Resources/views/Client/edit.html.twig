@@ -1,0 +1,13 @@
+{% extends 'HedgeCommEmailBundle:Default:base.html.twig' %}
+
+{% block title %}
+Edit Client
+{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+<a href="{{ path('client_detail', {'clientid': client.id}) }}">Back to client</a>&nbsp;<a href="{{ path('client_overview') }}">Back to overview</a>
+{% endblock %}
