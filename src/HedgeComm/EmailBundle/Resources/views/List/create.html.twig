@@ -6,6 +6,8 @@ Create List
 
 {% block body %}
 
+<a href="{{ path('client_detail', {'clientid': client.id}) }}">Back to client</a>
+
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}

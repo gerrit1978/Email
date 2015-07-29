@@ -45,7 +45,7 @@ class ListController extends Controller
 	        return $this->redirectToRoute('client_detail', array('clientid' => $clientid));
 		} else {
 			/* Form is not (yet) valid */
-			return $this->render('HedgeCommEmailBundle:List:create.html.twig', array('form' => $form->createView()));
+			return $this->render('HedgeCommEmailBundle:List:create.html.twig', array('form' => $form->createView(), 'client' => $client));
 		}
     }
 
@@ -94,7 +94,7 @@ class ListController extends Controller
 	        $this->addFlash('notice', 'SubscriberList was updated');
 	        return $this->redirectToRoute('client_detail', array('clientid' => $clientid));
 		}
-		return $this->render('HedgeCommEmailBundle:List:edit.html.twig', array('form' => $form->createView()));
+		return $this->render('HedgeCommEmailBundle:List:edit.html.twig', array('form' => $form->createView(), 'client' => $client));
     }
     
 	/**

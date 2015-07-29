@@ -48,7 +48,7 @@ class SubscriberController extends Controller
 	        return $this->redirectToRoute('subscriberlist_detail', array('clientid' => $clientid, 'listid' => $listid));
 		} else {
 			/* Form is not (yet) valid */
-			return $this->render('HedgeCommEmailBundle:Subscriber:addsingle.html.twig', array('form' => $form->createView()));
+			return $this->render('HedgeCommEmailBundle:Subscriber:addsingle.html.twig', array('form' => $form->createView(), 'client' => $client, 'list' => $subscriberList));
 		}		
     }
     
@@ -103,7 +103,7 @@ class SubscriberController extends Controller
 	        
 	    }
 	    
-	    return $this->render('HedgeCommEmailBundle:Subscriber:addmultiple.html.twig', array('form' => $form->createView()));
+	    return $this->render('HedgeCommEmailBundle:Subscriber:addmultiple.html.twig', array('form' => $form->createView(), 'client' => $client, 'list' => $subscriberList));
     }
     
     /**
@@ -180,6 +180,6 @@ class SubscriberController extends Controller
 	        
 	    }
 	    
-	    return $this->render('HedgeCommEmailBundle:Subscriber:addmultiple.html.twig', array('form' => $form->createView()));
+	    return $this->render('HedgeCommEmailBundle:Subscriber:addmultiple.html.twig', array('form' => $form->createView(), 'client' => $client, 'list' => $subscriberList));
     }
 }

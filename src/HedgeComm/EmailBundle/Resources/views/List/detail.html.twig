@@ -5,6 +5,8 @@ Detail Lists
 {% endblock %}
 
 {% block body %}
+
+<a href="{{ path('client_detail', {'clientid': client.id}) }}">Back to client</a>
 {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="flash-notice">
         {{ flashMessage }}
