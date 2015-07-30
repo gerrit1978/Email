@@ -65,3 +65,7 @@ subscriber_import_csv:
 subscriber_toggle_status:
     path:        /client/{clientid}/list/{listid}/subscriber/{subscriberid}/togglestatus
     defaults:    { _controller: HedgeCommEmailBundle:Subscriber:toggleSubscriberStatus }
+
+subscriber_delete:
+    path:        /client/{clientid}/list/{listid}/subscriber/{subscriberid}/delete
+    defaults:    { _controller: HedgeCommEmailBundle:Subscriber:subscriberDelete }

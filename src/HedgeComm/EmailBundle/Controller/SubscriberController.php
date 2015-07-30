@@ -192,5 +192,26 @@ class SubscriberController extends Controller
         return $this->redirectToRoute('subscriberlist_detail', array('clientid' => $clientid, 'listid' => $listid));
 
     }
-    
+
+	/**
+	 * Delete an existing subscriber
+	 *
+	 * @param integer $clientid
+	 * @param integer $listid
+	 * @param integer $subscriberid
+	 *
+	 */
+	public function subscriberDeleteAction($clientid, $listid, $subscriberid)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$subscriber = $em->getRepository('HedgeCommEmailBundle:Subscriber')->find($subscriberid);
+		if (!$subscriber)
+		{
+			throw $this->createNotFoundException('No subscriber found for id ' . $subscriberid);
+		}
+		$message = $em->getRepository('HedgeCommEmailBundle:Subscriber')->deleteSubscribers($subscriber);
+		$this->addFlash('notice', $message);
+		return $this->redirectToRoute('subscriberlist_detail', array('clientid' => $clientid, 'listid' => $listid));
+	}
+   
 }

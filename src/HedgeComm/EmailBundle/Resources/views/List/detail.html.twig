@@ -22,6 +22,7 @@ Name: {{ subscriberList.name }}
   <th>Name</th>
   <th>Email</th>
   <th>Status</th>
+  <th>&nbsp;</th>
 </tr>
 
 {% for subscriber in subscribers %}
@@ -35,6 +36,8 @@ Name: {{ subscriberList.name }}
     <a href="{{ path('subscriber_toggle_status', {'clientid': client.id, 'listid': subscriberList.id, 'subscriberid': subscriber.id}) }}">active</a>
   {% endif %}  
   </td>
+  <td><a href="{{ path('subscriber_delete', {'clientid': client.id, 'listid': subscriberList.id, 'subscriberid': subscriber.id}) }}">delete</a>
+  
 </tr>
 {% endfor %}
 </table>

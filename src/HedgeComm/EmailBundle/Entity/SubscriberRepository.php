@@ -14,28 +14,6 @@ class SubscriberRepository extends EntityRepository
 {
 
 	/**
-	 * Delete subscribers
-	 *
-	 * @param array(Subscribers) $subscribers
-	 *
-	 */
-	public function deleteSubscribers($subscribers)
-	{
-		$em = $this->getEntityManager();
-
-		if (!is_array($subscribers)) 
-		{
-			$subscribers = array($subscribers);
-		}
-
-		foreach ($subscribers as $subscriber)
-		{
-			$em->remove($subscriber);
-			$em->flush();
-		}
-	}
-
-	/**
 	 * Check if an email address is already subscribed
 	 * in list and for client
 	 *
@@ -170,5 +148,33 @@ class SubscriberRepository extends EntityRepository
 	 	$message = $countUnsubscribed . " subscriber(s) UNsubscribed - " . $countResubscribed . " subscriber(s) REsubscribed";
 	 	return $message;
 	 }
+
+	/**
+	 * Delete subscribers
+	 *
+	 * @param array $subscribers
+	 *
+	 */
+	public function deleteSubscribers($subscribers)
+	{
+
+		$em = $this->getEntityManager();
+
+		if (!is_array($subscribers))
+		{
+			$subscribers = array($subscribers);
+		}
+		
+		$countDeleted = 0;
+		
+		foreach ($subscribers as $subscriber)
+		{
+			$em->remove($subscriber);
+			$em->flush();
+			$countDeleted++;
+		}
+		$message = $countDeleted . " subscriber(s) deleted.";
+		return $message;
+	}
 	
 }
