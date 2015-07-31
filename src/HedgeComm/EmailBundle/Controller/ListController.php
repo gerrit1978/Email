@@ -37,6 +37,7 @@ class ListController extends Controller
 	        $subscriberList->setClient($client);
 	        $subscriberList->setDescription($values['description']);
 	        $subscriberList->setStatus($values['status']);
+	        $subscriberList->setSecret(md5($values['name'] . microtime()));
 	        $em = $this->getDoctrine()->getManager();
 	        $em->persist($subscriberList);
 	        $em->flush();

@@ -49,6 +49,12 @@ class SubscriberList
 	 */
 	private $status;
 
+	/**
+	 * @var secret
+	 * 
+	 * @ORM\Column(name="secret", type="string", length=48)
+	 */
+	private $secret;
 
     /**
      * Get id
@@ -151,4 +157,29 @@ class SubscriberList
 	{
 		return $this->status;
 	}
+	
+    /**
+	 * Set secret
+	 *
+	 * @param string $secret
+	 * @return SubscriberList
+	 */
+	public function setSecret($secret)
+	{
+		$this->secret = $secret;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get secret
+	 *
+	 * @return string
+	 *
+	 */
+	public function getSecret()
+	{
+		return $this->secret;
+	}
+
 }
