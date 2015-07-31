@@ -71,7 +71,7 @@ class ClientController extends Controller
 			$client->setFromName($values['fromName']);
 			$client->setFromEmail($values['fromEmail']);
 			$client->setReplyTo($values['replyTo']);
-			$client->setSecret(md5($values['name'] . time()));
+			$client->setSecret(md5($values['name'] . microtime()));
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($client);
 			$em->flush();

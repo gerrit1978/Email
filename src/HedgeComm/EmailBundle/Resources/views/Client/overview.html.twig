@@ -15,8 +15,8 @@ Overview Client
 
 <table>
 <tr>
-  <th>ID</th>
   <th>Name</th>
+  <th>Secret</th>
   <th>From Name</th>
   <th>From Email</th>
   <th>Reply To</th>
@@ -24,8 +24,8 @@ Overview Client
 </tr>
 {% for client in clients %}
 <tr>
-  <td>{{ client.id }}</td>
   <td><a href="{{ path('client_detail', {'clientid': client.id}) }}">{{ client.name }}</a></td>
+  <td>{{ client.secret }}</td>
   <td>{{ client.fromName }}</td>
   <td>{{ client.fromEmail }}</td>
   <td>{{ client.replyTo }}</td>

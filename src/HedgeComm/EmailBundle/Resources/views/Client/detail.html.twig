@@ -21,16 +21,16 @@ Reply To: {{ client.replyTo }}<br />
 <h3>Lists</h3>
 <table>
 <tr>
-  <th>ID</th>
   <th>Name</th>
+  <th>Secret</th>
   <th>Description</th>
   <th>Status</th>
   <th>Actions</th>
 </tr>
 {% for subscriberList in subscriberLists %}
 <tr>
-  <td>{{ subscriberList.id }}</td>
   <td><a href="{{ path('subscriberlist_detail', {'clientid': client.id, 'listid': subscriberList.id}) }}">{{ subscriberList.name }}</a></td>
+  <td>{{ subscriberList.secret }}</td>
   <td>{{ subscriberList.description }}</td>
   <td>
   {% if subscriberList.status %}
