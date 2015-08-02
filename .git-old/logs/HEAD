@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 2d54c814868df6bc46b853a983c91fcbef485d9b Gerrit Vos <gevo27@gmail.com> 1438175854 +0200	clone: from git@github.com:gerrit1978/Email.git
+2d54c814868df6bc46b853a983c91fcbef485d9b 352cbb78a59b2b92a616a62770d61f03dbf5cdc3 Gerrit Vos <gevo27@gmail.com> 1438189656 +0200	commit: Toggle status
+352cbb78a59b2b92a616a62770d61f03dbf5cdc3 6814d2aaceaa6bf70cf81e89a1e8200441894949 Gerrit Vos <gevo27@gmail.com> 1438284257 +0200	commit: Delete subscribers
+6814d2aaceaa6bf70cf81e89a1e8200441894949 1f8c4842ae49a232327e3743af0808ab07e111dd Gerrit Vos <gevo27@gmail.com> 1438350632 +0200	commit: Add secret variable to list
+1f8c4842ae49a232327e3743af0808ab07e111dd d9f23f1e70b64874dbbdc19f86c025fad113f9e4 Gerrit Vos <gevo27@gmail.com> 1438367940 +0200	commit: Add secret variable to list

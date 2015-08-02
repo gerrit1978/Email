@@ -100,6 +100,7 @@ class SubscriberRepository extends EntityRepository
 	{
 		$em = $this->getEntityManager();
 		$subscriber->setUnsubscribed(1);
+		$subscriber->setTimeStamp(time());
 		$em->flush();
 	}
 
@@ -113,6 +114,7 @@ class SubscriberRepository extends EntityRepository
 	{
 		$em = $this->getEntityManager();
 		$subscriber->setUnsubscribed(0);
+		$subscriber->setTimeStamp(time());
 		$em->flush();
 	}
 
