@@ -69,3 +69,8 @@ subscriber_toggle_status:
 subscriber_delete:
     path:        /client/{clientid}/list/{listid}/subscriber/{subscriberid}/delete
     defaults:    { _controller: HedgeCommEmailBundle:Subscriber:subscriberDelete }
+
+
+campaign_create:
+    path:        /client/{clientid}/campaign/create
+    defaults:    { _controller: HedgeCommEmailBundle:Campaign:campaignCreate }

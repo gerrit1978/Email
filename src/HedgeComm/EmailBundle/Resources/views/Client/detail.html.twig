@@ -44,4 +44,9 @@ Reply To: {{ client.replyTo }}<br />
 {% endfor %}
 </table>
 <a href="{{ path('subscriberlist_create', {'clientid': client.id }) }}">Add new list</a>
+
+<h3>Campaigns</h3>
+
+<a href="{{ path('campaign_create', {'clientid': client.id }) }}">Add new campaign</a>
+
 {% endblock %}
