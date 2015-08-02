@@ -38,10 +38,16 @@ class ClientController extends Controller
 								->findBy(
 									array('client' => $clientid)
 								);
+		$campaigns = $this->getDoctrine()
+							->getRepository('HedgeCommEmailBundle:Campaign')
+							->findBy(
+								array('client' => $clientid)
+							);
 		return $this->render('HedgeCommEmailBundle:Client:detail.html.twig', 
 			array(
 				'client' => $client, 
-				'subscriberLists' => $subscriberLists
+				'subscriberLists' => $subscriberLists,
+				'campaigns' => $campaigns,
 			)
 		);
 	}

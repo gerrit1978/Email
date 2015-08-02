@@ -30,27 +30,31 @@ class CampaignController extends Controller
 		/* Form is valid */
 		if ($form->isValid())
 		{
-			exit('campaign ingevoerd');
-/*
 			$values = array(
 				'name' => $form->get('name')->getData(),
 				'fromName' => $form->get('fromName')->getData(),
 				'fromEmail' => $form->get('fromEmail')->getData(),
 				'replyTo' => $form->get('replyTo')->getData(),
+				'textPlain' => $form->get('textPlain')->getData(),
+				'textHtml' => $form->get('textHtml')->getData(),
 			);
-			$client = new Client();
-			$client->setName($values['name']);
-			$client->setFromName($values['fromName']);
-			$client->setFromEmail($values['fromEmail']);
-			$client->setReplyTo($values['replyTo']);
-			$client->setSecret(md5($values['name'] . microtime()));
+			
+			$campaign = new Campaign();
+			$campaign->setName($values['name']);
+			$campaign->setFromName($values['fromName']);
+			$campaign->setFromEmail($values['fromEmail']);
+			$campaign->setReplyTo($values['replyTo']);
+			$campaign->setTextPlain($values['textPlain']);
+			$campaign->setTextHtml($values['textHtml']);
+			$campaign->setSent(0);
+			$campaign->setClient($client);
 			$em = $this->getDoctrine()->getManager();
-			$em->persist($client);
+			$em->persist($campaign);
 			$em->flush();
 			
-			$this->addFlash('notice', 'A new client was saved');
-			return $this->redirectToRoute('client_overview');
-*/
+			$this->addFlash('notice', 'A new campaign was saved');
+			return $this->redirectToRoute('client_detail', array('clientid' => $clientid));
+
 		} else
 		{
 			/* Form is not (yet) valid */

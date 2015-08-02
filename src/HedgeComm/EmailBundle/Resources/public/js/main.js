@@ -1,3 +1,4 @@
 $(document).ready(function() {
-  CKEDITOR.replace('.wysiwyg');
+  CKEDITOR.replaceClass = 'wysiwyg';
+  /*CKEDITOR.replace('hedgecomm_emailbundle_campaign[textHtml]');*/
 });

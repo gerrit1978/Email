@@ -9,11 +9,11 @@
     <body>
         <a href="{{ path('home') }}">Back to home</a>
         {% block body %}{% endblock %}
-        {% block javascripts %}<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>{% endblock %}
-        {% javascripts
-        	'@HedgeCommEmailBundle/Resources/public/js/ckeditor/ckeditor.js' 
-        	'@HedgeCommEmailBundle/Resources/public/js/main.js'
-        %}
+        {% block javascripts %}
+        	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+			<script src="https://cdn.ckeditor.com/4.5.1/full/ckeditor.js"></script>	
+        {% endblock %}
+        {% javascripts '@HedgeCommEmailBundle/Resources/public/js/main.js' %}
         	<script src="{{ asset_url }}"></script>
 		{% endjavascripts %}
     </body>

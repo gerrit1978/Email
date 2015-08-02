@@ -30,6 +30,11 @@ class ClientRepository extends EntityRepository
 			{
 				$result = $em->getRepository('HedgeCommEmailBundle:SubscriberList')->deleteSubscriberLists($subscriberLists);
 			}
+			$campaigns = $em->getRepository('HedgeCommEmailBundle:Campaign')->findBy(array('client' => $clientId));
+			if (is_array($campaigns) && count($campaigns))
+			{
+				$result = $em->getRepository('HedgeCommEmailBundle:Campaign')->deleteCampaigns($campaigns);
+			}
 	
 			$em->remove($client);
 			$em->flush();

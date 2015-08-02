@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class CampaignRepository extends EntityRepository
 {
+
+	public function deleteCampaigns($campaigns)
+	{
+		$em = $this->getEntityManager();
+	
+		if (!is_array($campaigns)) 
+		{
+			$campaigns = array($campaigns);
+		}
+	
+		foreach ($campaigns as $campaign)
+		{
+			$em->remove($campaign);
+			$em->flush();
+		}
+	}
+
 }

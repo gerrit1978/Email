@@ -46,6 +46,24 @@ Reply To: {{ client.replyTo }}<br />
 <a href="{{ path('subscriberlist_create', {'clientid': client.id }) }}">Add new list</a>
 
 <h3>Campaigns</h3>
+<table>
+<tr>
+  <th>Name</th>
+  <th>From Name</th>
+  <th>From Email</th>
+  <th>Reply To</th>
+  <th>Sent?</th>
+</tr>
+{% for campaign in campaigns %}
+<tr>
+  <td>{{ campaign.name }}</td>
+  <td>{{ campaign.fromName }}</td>
+  <td>{{ campaign.fromEmail }}</td>
+  <td>{{ campaign.replyTo }}</td>
+  <td>{{ campaign.sent }}</td>
+</tr>
+{% endfor %}
+</table>
 
 <a href="{{ path('campaign_create', {'clientid': client.id }) }}">Add new campaign</a>
 

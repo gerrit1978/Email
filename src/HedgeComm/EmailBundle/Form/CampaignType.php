@@ -15,12 +15,12 @@ class CampaignType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        	->add('name')
             ->add('fromName')
             ->add('fromEmail')
             ->add('replyTo')
             ->add('textPlain')
-            ->add('textHtml')
-            ->add('sent')
+            ->add('textHtml', 'textarea', array('attr' => array('class' => 'wysiwyg')))
         ;
     }
     
@@ -39,6 +39,6 @@ class CampaignType extends AbstractType
      */
     public function getName()
     {
-        return 'hedgecomm_emailbundle_campaign';
+        return NULL;
     }
 }
